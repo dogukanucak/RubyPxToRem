@@ -4,7 +4,7 @@ This Ruby script converts the PX values in CSS/SCSS files in given folder path r
 
 <pre>Usage: ./RubyPxToRem.rb [options]
     -p, --path=PATH                  Folder path to be converted. Default value: &apos;cssFiles&apos; 
-    -f, --font-size=FONTSIZE             Font Size to calculate Rem values. Calculation will be done as &lt;PX-VALUE&gt; / &lt;FONT-SIZE&gt;. Default value: &apos;10&apos;
+    -f, --font-size=FONTSIZE         Font Size to calculate Rem values. Calculation will be done as &lt;PX-VALUE&gt; / &lt;FONT-SIZE&gt;. Default value: &apos;10&apos;
     -h, --help                       Prints this help
 </pre>
 
