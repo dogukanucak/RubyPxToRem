@@ -1,5 +1,5 @@
 # RubyPxToRem
-Small Hobby Project To Conver Px Values To Rem In CSS/SCSS
+Small hobby project to convert px values to rem values in CSS/SCSS files
 This Ruby script converts the PX values in CSS/SCSS files in given folder path recursively to REM values.
 
 <pre>Usage: ./RubyPxToRem.rb [options]
