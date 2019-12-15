@@ -23,8 +23,7 @@ Example:
       height: 200px;
     }
     
-   // ./RubyPxToRem.rb -p styles/
-   // After convertion
+   // ./RubyPxToRem.rb -p styles/  
      
     div.a
     {
