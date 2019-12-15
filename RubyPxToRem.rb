@@ -1,5 +1,7 @@
+#!/usr/bin/ruby
 require 'tempfile'
 require 'fileutils'
+require 'optparse'
 
 def trim (num)
     i, f = num.to_i, num.to_f
@@ -18,7 +20,7 @@ def convertToPx(px,fontSize)
     return  "#{trim(remValue)}rem"
 end
 
-def ProcessFile(filename)
+def ProcessFile(filename,fontSize)
     puts "#{filename} has started processing..."
     path = filename
     temp_file = Tempfile.new('foo')
@@ -26,7 +28,7 @@ def ProcessFile(filename)
       File.open(path, 'r') do |file|
         file.each_line do |line|        
           if(matchToPx(line))       
-            line = line.gsub(/\d+px/) { |pxValue| convertToPx(pxValue,10) }
+            line = line.gsub(/\d+px/) { |pxValue| convertToPx(pxValue,fontSize) }
             temp_file.puts line 
           else
             temp_file.puts line            
@@ -43,9 +45,46 @@ def ProcessFile(filename)
 end
 
 
+options = {}
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: ./RubyPxToRem.rb [options]"
+
+  opts.on("-p", "--path=PATH", "Folder path to be converted. Default value: 'cssFiles' ") do |v|    
+    options[:styles_path] = v
+  end
+
+  opts.on("-f", "--font-size=PATH", "Font Size to calculate Rem values. Calculation will be done as <PX-VALUE> / <FONT-SIZE>. Default value: '10'") do |v|    
+    options[:font_size] = v
+  end
+
+
+ 
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+
+end
+
+begin parser.parse! ARGV
+rescue OptionParser::InvalidOption => e
+  puts e
+  puts parser
+  exit 1
+  end
+
+#Check parameters
+path = options[:styles_path] || "cssFiles"
+font_size = options[:font_size] || 10
+
+ 
+
+puts "#{path} will be processed recusively"
+puts "Font size: #{font_size}"
 puts "Convertion has started..."
-Dir.glob("cssFiles/**/*.{css,scss}") do |fileName| 
-    ProcessFile(fileName)    
+
+Dir.glob("#{path}/**/*.{css,scss}") do |fileName| 
+    ProcessFile(fileName,font_size)    
 end
 puts "Convertion has finished..."
 
