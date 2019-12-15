@@ -10,8 +10,9 @@ This Ruby script converts the PX values in CSS/SCSS files in given folder path r
 
 
 Example: 
-  // styles/test.css
-    div.a
+  # styles/test.css
+    
+    div
     {
         font-size: 15px;
     }
@@ -22,8 +23,8 @@ Example:
       height: 200px;
     }
     
-  // ./RubyPxToRem.rb -p styles/
-  // After convertion
+   # ./RubyPxToRem.rb -p styles/
+   # After convertion
      div.a
     {
         font-size: 1.5rem;
